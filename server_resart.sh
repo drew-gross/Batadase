@@ -12,6 +12,6 @@ find . -iname '*.pyc' -exec rm {} \;
 
 kill `cat $PIDFILE`
 
-./manage.py runfcgi pidfile=$PIDFILE debug=True outlog=$OUTLOG errlog=$ERRLOG
+./Batadase/manage.py runfcgi pidfile=$PIDFILE debug=True outlog=$OUTLOG errlog=$ERRLOG
 
 sudo service nginx reload
