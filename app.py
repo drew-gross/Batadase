@@ -11,7 +11,7 @@ class KeyHandler(tornado.web.RequestHandler):
 
 application = tornado.web.Application([
     (r"/", MainHandler),
-    (r"/key/(.*)", KeyHandler),
+    (r"/key/(.*)/?$", KeyHandler),
 ])
 
 if __name__ == "__main__":
