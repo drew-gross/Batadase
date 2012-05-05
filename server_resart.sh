@@ -1,7 +1,6 @@
 #!/bin/bash
 
-RELATIVE_PATH="$(dirname $0)/../"
-ROOT_PATH="$(readlink -f $RELATIVE_PATH)"
+ROOT_PATH="~/"
 
 PIDFILE="${ROOT_PATH}/django-flup.pid"
 SOCKETFILE="${ROOT_PATH}/django.sock"
