@@ -1,0 +1,1 @@
+var this_is_javascript = 50;
