@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ROOT_PATH="~/"
+ROOT_PATH="/"
 
 PIDFILE="${ROOT_PATH}/django-flup.pid"
 OUTLOG="${ROOT_PATH}/django.out"
