@@ -3,7 +3,7 @@ from django.utils.simplejson import loads, dumps
 
 from api.models import Key, Value
 
-def key(request, key):
+def key_view(request, key):
     if request.method == 'GET':
         try:
             key_obj = Key.objects.get(key=key)
