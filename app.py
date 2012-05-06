@@ -10,6 +10,11 @@ import json
 options.define("port", default=800)
 options.parse_config_file("../batadase.conf")
 
+class MainHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.set_header('Content-Type', 'text/javascript')
+        self.write(open('script.js').read())
+
 class KeyHandler(tornado.web.RequestHandler):
     def get(self, key):
         session = db.Session()
@@ -41,6 +46,7 @@ class KeyHandler(tornado.web.RequestHandler):
             return
 
 application = tornado.web.Application([
+    (r"/", MainHandler),
     (r"/([^/]*)/*$", KeyHandler),
 ], debug=True,)
 
