@@ -5,9 +5,12 @@ import db
 class KeyHandler(tornado.web.RequestHandler):
     def get(self, key):
         session = db.Session()
-        values = session.query(db.Key).filter_by(key_name=key).all()[0].values
         self.set_header('Content-Type', 'application/json')
-        self.write(str(map(lambda value:value.data, values)))
+        try:
+            values = session.query(db.Key).filter_by(key_name=key).all()[0].values
+            self.write(str(map(lambda value:value.data, values)))
+        except:
+            self.write('[]') #this is an ugly hack but w/e
 
     def post(self, key):
         data = self.request.body
