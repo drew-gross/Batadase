@@ -21,7 +21,7 @@ class KeyHandler(tornado.web.RequestHandler):
         self.set_header('Content-Type', 'application/json')
         try:
             values = session.query(db.Key).filter_by(key_name=key).all()[0].values
-            self.write(map(lambda value:value.data, values))
+            self.write(json.dumps(map(lambda value:json.loads(value.data), values)))
         except:
             self.write('[]') #this is an ugly hack but w/e
 
