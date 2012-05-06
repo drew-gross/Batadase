@@ -2,10 +2,6 @@ import tornado.ioloop
 import tornado.web
 import db
 
-class MainHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.write("Hello, world")
-
 class KeyHandler(tornado.web.RequestHandler):
     def get(self, key):
         session = db.Session()
@@ -28,8 +24,7 @@ class KeyHandler(tornado.web.RequestHandler):
         self.write('test1')
 
 application = tornado.web.Application([
-    (r"/", MainHandler),
-    (r"/key/([^/]*)/*$", KeyHandler),
+    (r"/([^/]*)/*$", KeyHandler),
 ], debug=True,)
 
 if __name__ == "__main__":
