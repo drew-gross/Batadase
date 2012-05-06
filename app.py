@@ -9,8 +9,9 @@ class MainHandler(tornado.web.RequestHandler):
 class KeyHandler(tornado.web.RequestHandler):
     def get(self, key):
         session = db.Session()
-        obj = session.query(db.Key).filter_by(key_name=key).all()
-        self.write(repr(obj[0].values))
+        values = session.query(db.Key).filter_by(key_name=key).all()[0].values
+        self.set_header('Content-Type', 'application/json')
+        self.write(str(map(lambda value:value.data, values)))
 
     def post(self, key):
         data = self.request.body
@@ -20,7 +21,8 @@ class KeyHandler(tornado.web.RequestHandler):
         elif session.query(db.Key).filter_by(key_name=key).count() == 1:
             new_key = list(session.query(db.Key).filter_by(key_name=key))[0]
         session.add(new_key)
-        session.add(db.Value(data=data, key=new_key))
+        new_value = db.Value(data=data, key=new_key)
+        session.add(new_value)
         session.commit()
         self.write('test1')
 
