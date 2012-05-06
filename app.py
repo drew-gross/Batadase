@@ -1,8 +1,14 @@
+import tornado.options
+from tornado import options
+
 import tornado.ioloop
 import tornado.web
 import db
 
 import json
+
+options.define("port", default=800)
+options.parse_config_file("../batadase.conf")
 
 class KeyHandler(tornado.web.RequestHandler):
     def get(self, key):
@@ -39,5 +45,5 @@ application = tornado.web.Application([
 ], debug=True,)
 
 if __name__ == "__main__":
-    application.listen(800)
+    application.listen(options.options.port)
     tornado.ioloop.IOLoop.instance().start()
