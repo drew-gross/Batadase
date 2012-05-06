@@ -21,6 +21,7 @@ class KeyHandler(tornado.web.RequestHandler):
         elif session.query(db.Key).filter_by(key_name=key).count() == 1:
             new_key = list(session.query(db.Key).filter_by(key_name=key))[0]
         session.add(new_key)
+        session.commit()
         new_value = db.Value(data=data, key=new_key)
         session.add(new_value)
         session.commit()
