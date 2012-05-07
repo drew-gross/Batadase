@@ -13,7 +13,7 @@ options.parse_config_file("../batadase.conf")
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.set_header('Content-Type', 'text/javascript')
-        self.write(open('script.js').read())
+        self.write(open('script.html').read())
 
 class KeyHandler(tornado.web.RequestHandler):
     def get(self, key):
